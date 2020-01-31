@@ -1,9 +1,11 @@
+require("express-async-errors");
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
 
 const users = require("./routes/user");
 const messages = require("./routes/message");
+const error = require("./middleware/error");
 
 const app = express();
 
@@ -33,6 +35,8 @@ mongoose
   .catch(err => {
     console.log(`Couldn't connect to MongoDB cause of ${err}`);
   });
+
+app.use(error);
 
 //Listen for client requests
 const PORT = process.env.PORT || 3000;

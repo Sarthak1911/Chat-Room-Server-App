@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
   });
 
   if (error) {
-    res.status(400).json({ error: error.details[0].message });
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   let { username, password } = req.body;
@@ -41,7 +41,11 @@ router.post("/register", async (req, res) => {
       .status(200)
       .json({ username: user.username, _id: user._id });
   } catch (error) {
-    res.status(400).json({ error: "Username already taken." });
+    if (error.code === 11000) {
+      res.status(400).json({ error: "Username is already taken" });
+    } else {
+      throw Error(error);
+    }
   }
 });
 
@@ -54,7 +58,7 @@ router.post("/login", async (req, res) => {
   });
 
   if (error) {
-    res.status(400).json({ error: error.details[0].message });
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   const loggedInUser = await loginUser(req.body);
