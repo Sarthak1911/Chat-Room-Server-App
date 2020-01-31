@@ -1,1 +1,4 @@
-{}
+{
+  "connectionString": "mongodb://localhost/chat-room",
+  "jwtPvtKey": "JWTPVTKEY"
+}

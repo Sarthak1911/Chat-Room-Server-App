@@ -4,12 +4,12 @@ async function getMessages() {
   return await Message.find().sort({ date: -1 });
 }
 
-async function createMessage(messageObj) {
-  const { message, username } = messageObj;
+async function createMessage(newMessage) {
+  const { message, username } = newMessage;
 
   let msg = new Message({
-    message,
-    username,
+    message: message.trim(),
+    username: message.trim(),
     like: [],
     date: new Date()
   });

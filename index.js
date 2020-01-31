@@ -7,6 +7,11 @@ const messages = require("./routes/message");
 
 const app = express();
 
+if (!config.get("jwtPvtKey")) {
+  console.log("FATAL EXCEPTION - AUTH SERVICE NOT FUNCTIONING");
+  process.exit(1);
+}
+
 //Middlewares
 app.use(express.json());
 app.use("/api/users", users);
@@ -18,7 +23,7 @@ app.get("/", (req, res) => {
 
 //MongoDB connection
 mongoose
-  .connect("mongodb://localhost/chat-room", {
+  .connect(config.get("connectionString"), {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

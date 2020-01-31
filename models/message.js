@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("useCreateIndex", true);
 
 const messageSchema = new mongoose.Schema({
   message: { type: String, required: true },
