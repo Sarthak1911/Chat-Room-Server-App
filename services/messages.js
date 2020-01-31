@@ -9,7 +9,7 @@ async function createMessage(newMessage) {
 
   let msg = new Message({
     message: message.trim(),
-    username: message.trim(),
+    username: username.trim(),
     like: [],
     date: new Date()
   });
