@@ -2,12 +2,15 @@ require("express-async-errors");
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
+const cors = require("cors");
 
 const users = require("./routes/user");
 const messages = require("./routes/message");
 const error = require("./middleware/error");
 
 const app = express();
+
+app.use(cors());
 
 if (!config.get("jwtPvtKey")) {
   console.log("FATAL EXCEPTION - AUTH SERVICE NOT FUNCTIONING");

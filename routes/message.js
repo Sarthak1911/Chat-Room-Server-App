@@ -28,7 +28,7 @@ router.post("/", auth, async (req, res) => {
   res.status(200).json(await createMessage(req.body));
 });
 
-router.put("/:id", auth, async (req, res) => {
+router.post("/:id", auth, async (req, res) => {
   const { username } = req.body;
   const { id } = req.params;
 

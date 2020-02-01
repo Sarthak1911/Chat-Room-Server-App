@@ -38,6 +38,7 @@ router.post("/register", async (req, res) => {
 
     res
       .header("x-auth-token", token)
+      .header("access-control-expose-headers", "x-auth-token")
       .status(200)
       .json({ username: user.username, _id: user._id });
   } catch (error) {
@@ -72,6 +73,7 @@ router.post("/login", async (req, res) => {
 
   res
     .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
     .status(200)
     .json({ _id: loggedInUser._id, username: loggedInUser.username });
 });
